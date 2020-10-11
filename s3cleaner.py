@@ -71,7 +71,7 @@ def lambda_handler(event, context):
                 _expire_date = _today- timedelta(days=table_details['expiration_days'])
                 print(key_date)
                 print(_expire_date)
-                if key_date != _expire_date:
+                if key_date < _expire_date:
                     file_path = s3_file["key_path"][i]
                     s3_client.delete_object(Bucket = bucket, Key = file_path)
                     table, partition = file_path.split('/')[5:7]
